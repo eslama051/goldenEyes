@@ -27,10 +27,11 @@ const USER_TOKEN = store.getters["auth_module/currentUser"].token;
 const CURRENT_LANG = store.getters["lang_module/lang"];
 
 // Global headers
-axios.defaults.baseURL = "https://speed4ever.elsaed.aait-d.com/dashboard/"; // baseurl
+axios.defaults.baseURL = "http://goldeneyes.aya.aait-d.com/api/"; // baseurl
 axios.defaults.headers.common["cache-control"] = "no-cache";
 axios.defaults.headers.common["Accept"] = "application/json";
 axios.defaults.headers.common["Accept-language"] = CURRENT_LANG;
+// axios.defaults.headers.common["Accept-Charset"] = "application/json";
 axios.defaults.headers.common["lang"] = CURRENT_LANG;
 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 axios.defaults.headers.common["timezone"] = timezone;

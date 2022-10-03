@@ -15,13 +15,9 @@
           <div class="row justify-content-between">
             <!-- Images -->
             <uplode-image-2 @inputChanged="image_uploded"></uplode-image-2>
-            <uplode-multiple
-              @imageDeleted="spliceImage"
-              @inputChanged="images_uploded"
-            ></uplode-multiple>
 
-            <!-- Name -->
-            <div class="col-lg-12 py-0">
+            <!-- Name ar-->
+            <div class="col-md-6 py-0">
               <div class="input_wrapper top_label">
                 <input
                   type="text"
@@ -30,31 +26,30 @@
                   v-model.trim="data.name"
                 />
                 <label for="name_input" class="form-label">{{
-                  $t("forms.labels.name")
+                  $t("forms.labels.name_ar")
                 }}</label>
               </div>
             </div>
-
-            <!-- Desc -->
-            <div class="col-lg-12 py-0">
+            <!-- Name en-->
+            <div class="col-md-6 py-0">
               <div class="input_wrapper top_label">
-                <label for="textarea_1" class="form-label">{{
-                  $t("forms.labels.desc")
-                }}</label>
-                <textarea
+                <input
+                  type="text"
                   class="form-control"
-                  id="textarea_1"
-                  rows="2"
-                  v-model.trim="data.desc"
-                ></textarea>
+                  @input="helper_checkIfInputIsEmpty"
+                  v-model.trim="data.name"
+                />
+                <label for="name_input" class="form-label">{{
+                  $t("forms.labels.name_en")
+                }}</label>
               </div>
             </div>
 
-            <!-- Status -->
-            <div class="col-lg-6 py-0">
+            <!-- category -->
+            <div class="col-md-6">
               <div class="input_wrapper top_label">
                 <label class="form-label">{{
-                  $t("forms.labels.status")
+                  $t("forms.labels.category")
                 }}</label>
                 <multiselect
                   v-model="data.status"
@@ -70,289 +65,40 @@
               </div>
             </div>
 
-            <!-- Amount Left -->
-            <div class="col-lg-6 py-0">
+            <!-- qunatity name -->
+            <div class="col-md-6">
+              <div class="input_wrapper top_label">
+                <label class="form-label">{{
+                  $t("forms.labels.qtyName")
+                }}</label>
+                <multiselect
+                  v-model="data.qtyName"
+                  :options="status"
+                  label="name"
+                  track-by="id"
+                  placeholder=" "
+                  :qtyle="true"
+                  :allow-empty="false"
+                  :show-labels="false"
+                >
+                </multiselect>
+              </div>
+            </div>
+
+            <!-- price -->
+            <div class="col-12">
               <div class="input_wrapper top_label">
                 <input
                   type="number"
                   class="form-control"
                   @input="helper_checkIfInputIsEmpty"
-                  v-model.trim="data.amountLeft"
+                  v-model.trim="data.price"
                 />
                 <label for="name_input" class="form-label">{{
-                  $t("forms.labels.amountLeft")
+                  $t("forms.labels.price")
                 }}</label>
               </div>
             </div>
-
-            <!-- User -->
-            <div class="col-lg-12 py-0">
-              <div class="input_wrapper top_label">
-                <label class="form-label">{{ $t("forms.labels.user") }}</label>
-                <multiselect
-                  v-model="data.user"
-                  :options="users"
-                  label="name"
-                  track-by="id"
-                  placeholder=" "
-                  :searchable="true"
-                  :allow-empty="false"
-                  :show-labels="false"
-                >
-                </multiselect>
-              </div>
-            </div>
-
-            <!-- Category & SubCategory -->
-            <div class="col-lg-6 py-0">
-              <div class="input_wrapper top_label">
-                <label class="form-label">{{
-                  $t("forms.labels.category")
-                }}</label>
-                <multiselect
-                  @input="
-                    getSubCategories();
-                    data.subCategorie = null;
-                  "
-                  v-model="data.category"
-                  :options="categories"
-                  label="name"
-                  track-by="id"
-                  placeholder=" "
-                  :searchable="true"
-                  :allow-empty="false"
-                  :show-labels="false"
-                >
-                </multiselect>
-              </div>
-            </div>
-            <div class="col-lg-6 py-0">
-              <div
-                class="input_wrapper top_label"
-                :class="{ disabled: !data.category }"
-              >
-                <label class="form-label">{{
-                  $t("forms.labels.SubCategorie")
-                }}</label>
-                <multiselect
-                  v-model="data.subCategorie"
-                  :options="subCategories"
-                  label="name"
-                  track-by="id"
-                  placeholder=" "
-                  :searchable="true"
-                  :allow-empty="false"
-                  :show-labels="false"
-                >
-                </multiselect>
-              </div>
-            </div>
-
-            <!-- Country && City -->
-            <div class="col-lg-6 py-0">
-              <div class="input_wrapper top_label">
-                <label class="form-label">{{
-                  $t("forms.labels.country")
-                }}</label>
-                <multiselect
-                  @input="
-                    getCities();
-                    data.city = null;
-                  "
-                  v-model="data.country"
-                  :options="countries"
-                  label="name"
-                  track-by="id"
-                  placeholder=" "
-                  :searchable="true"
-                  :allow-empty="false"
-                  :show-labels="false"
-                >
-                </multiselect>
-              </div>
-            </div>
-            <div class="col-lg-6 py-0">
-              <div
-                class="input_wrapper top_label"
-                :class="{ disabled: !data.country }"
-              >
-                <label class="form-label">{{ $t("forms.labels.city") }}</label>
-                <multiselect
-                  v-model="data.city"
-                  :options="cities"
-                  label="name"
-                  track-by="id"
-                  placeholder=" "
-                  :searchable="true"
-                  :allow-empty="false"
-                  :show-labels="false"
-                >
-                </multiselect>
-              </div>
-            </div>
-
-            <!-- Shipping Way -->
-            <div class="col-lg-12 py-0">
-              <div class="input_wrapper top_label">
-                <label class="form-label">{{
-                  $t("forms.labels.shippingWay")
-                }}</label>
-                <multiselect
-                  v-model="data.shippingWay"
-                  :options="shippingWaies"
-                  label="name"
-                  track-by="id"
-                  placeholder=" "
-                  :searchable="true"
-                  :allow-empty="false"
-                  :show-labels="false"
-                >
-                </multiselect>
-              </div>
-            </div>
-
-            <!-- Product Type Sell -->
-            <v-radio-group v-model="data.productRadio">
-              <v-radio
-                :label="$t('forms.labels.isAcuation')"
-                value="isAcuation"
-                color="indigo lighten-2"
-              ></v-radio>
-
-              <div class="row">
-                <!-- Start date -->
-                <div class="col-lg-6 py-0">
-                  <div
-                    class="input_wrapper top_label date_input"
-                    :class="{ disabled: data.productRadio != 'isAcuation' }"
-                  >
-                    <label class="form-label">{{
-                      $t("forms.labels.start_date")
-                    }}</label>
-                    <v-menu
-                      v-model="dateMenu_start"
-                      :close-on-content-click="false"
-                      :nudge-right="40"
-                      transition="scale-transition"
-                      offset-y
-                      min-width="auto"
-                    >
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-text-field
-                          v-model="data.start_date"
-                          label="Picker without buttons"
-                          prepend-icon="mdi-calendar"
-                          readonly
-                          v-bind="attrs"
-                          v-on="on"
-                        ></v-text-field>
-                      </template>
-                      <v-date-picker
-                        v-model="data.start_date"
-                        @input="dateMenu_start = false"
-                        no-title
-                      ></v-date-picker>
-                    </v-menu>
-                  </div>
-                </div>
-
-                <!-- End date -->
-                <div class="col-lg-6 py-0">
-                  <div
-                    class="input_wrapper top_label date_input"
-                    :class="{ disabled: data.productRadio != 'isAcuation' }"
-                  >
-                    <label class="form-label">{{
-                      $t("forms.labels.end_date")
-                    }}</label>
-                    <v-menu
-                      v-model="dateMenu_end"
-                      :close-on-content-click="false"
-                      :nudge-right="40"
-                      transition="scale-transition"
-                      offset-y
-                      min-width="auto"
-                    >
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-text-field
-                          v-model="data.end_date"
-                          label="Picker without buttons"
-                          prepend-icon="mdi-calendar"
-                          readonly
-                          v-bind="attrs"
-                          v-on="on"
-                        ></v-text-field>
-                      </template>
-                      <v-date-picker
-                        v-model="data.end_date"
-                        @input="dateMenu_end = false"
-                        no-title
-                      ></v-date-picker>
-                    </v-menu>
-                  </div>
-                </div>
-
-                <!-- Start Price -->
-                <div class="col-lg-6 py-0">
-                  <div
-                    class="input_wrapper top_label"
-                    :class="{ disabled: data.productRadio != 'isAcuation' }"
-                  >
-                    <input
-                      type="number"
-                      class="form-control"
-                      @input="helper_checkIfInputIsEmpty"
-                      v-model.trim="data.start_price"
-                      @change="getDynamicbidValue()"
-                    />
-
-                    <label for="name_input" class="form-label">{{
-                      $t("forms.labels.start_price")
-                    }}</label>
-                  </div>
-                </div>
-
-                <!-- Bid Value -->
-                <div class="col-lg-6 py-0">
-                  <div class="input_wrapper top_label disabled">
-                    <input
-                      type="number"
-                      class="form-control disabled"
-                      @input="helper_checkIfInputIsEmpty"
-                      v-model.trim="data.bit_value"
-                    />
-                    <label for="name_input" class="form-label">{{
-                      $t("forms.labels.bit_value")
-                    }}</label>
-                  </div>
-                </div>
-              </div>
-
-              <v-radio
-                class="my-4"
-                :label="$t('forms.labels.isDirectSell')"
-                value="isDirectSell"
-                color="indigo lighten-2"
-              ></v-radio>
-
-              <!-- Price -->
-              <div class="col-lg-12 py-0">
-                <div
-                  class="input_wrapper top_label"
-                  :class="{ disabled: data.productRadio != 'isDirectSell' }"
-                >
-                  <input
-                    type="number"
-                    class="form-control"
-                    @input="helper_checkIfInputIsEmpty"
-                    v-model.trim="data.sellPrice"
-                  />
-                  <label for="name_input" class="form-label">{{
-                    $t("forms.labels.sellPrice")
-                  }}</label>
-                </div>
-              </div>
-            </v-radio-group>
           </div>
         </div>
 
@@ -402,25 +148,10 @@ export default {
       // ========== create_data
       data: {
         image: null,
-        images: null,
         name: null,
-        desc: null,
-        status: null,
-        amountLeft: null,
-        user: null,
         category: null,
-        subCategorie: null,
-        country: null,
-        city: null,
-        shippingWay: null,
-        start_date: null,
-        end_date: null,
-        start_price: null,
-        bit_value: null,
-        sellPrice: null,
-
-        // Radio
-        productRadio: "isAcuation",
+        price: null,
+        qtyName: null,
       },
 
       // Menues
@@ -654,91 +385,91 @@ export default {
           };
         });
       });
-
-      // Main_Category
-      this.$axios({
-        method: "GET",
-        url: `category`,
-      }).then((res) => {
-        this.categories = res.data.data.map((item) => {
-          return {
-            id: item.id,
-            name: `${item.ar.name} - ${item.en.name}`,
-          };
-        });
-      });
-
-      // Country
-      this.$axios({
-        method: "GET",
-        url: `country`,
-      }).then((res) => {
-        this.countries = res.data.data.map((item) => {
-          return {
-            id: item.id,
-            name: `${item.ar.name} - ${item.en.name}`,
-          };
-        });
-      });
-
-      // ShppingWay
-      this.$axios({
-        method: "GET",
-        url: `shippingWay`,
-      }).then((res) => {
-        this.shippingWaies = res.data.data.map((item) => {
-          return {
-            id: item.id,
-            name: `${item.ar.name} - ${item.en.name}`,
-          };
-        });
-      });
-
-      // Users
-      this.$axios({
-        method: "GET",
-        url: `help-services?type=client`,
-      }).then((res) => {
-        this.users = res.data.data.map((item) => {
-          return {
-            id: item.id,
-            name: `${item.username}`,
-          };
-        });
-      });
     },
+    // Main_Category
+    // this.$axios({
+    //   method: "GET",
+    //   url: `category`,
+    // }).then((res) => {
+    //   this.categories = res.data.data.map((item) => {
+    //     return {
+    //       id: item.id,
+    //       name: `${item.ar.name} - ${item.en.name}`,
+    //     };
+    //   });
+    // });
 
-    // ============ Get Run Time Data
-    getSubCategories() {
-      this.$axios({
-        method: "GET",
-        url: `subCategories/${this.data.category.id}`,
-      }).then((res) => {
-        this.subCategories = res.data.data.map((item) => {
-          return {
-            id: item.id,
-            name: `${item.ar.name} - ${item.en.name}`,
-          };
-        });
-      });
-    },
-    getCities() {
-      this.$axios({
-        method: "GET",
-        url: `cities/${this.data.country.id}`,
-      }).then((res) => {
-        this.cities = res.data.data.map((item) => {
-          return {
-            id: item.id,
-            name: `${item.ar.name} - ${item.en.name}`,
-          };
-        });
-      });
-    },
+    // Country
+    // this.$axios({
+    //   method: "GET",
+    //   url: `country`,
+    // }).then((res) => {
+    //   this.countries = res.data.data.map((item) => {
+    //     return {
+    //       id: item.id,
+    //       name: `${item.ar.name} - ${item.en.name}`,
+    //     };
+    //   });
+    // });
+
+    // ShppingWay
+    // this.$axios({
+    //   method: "GET",
+    //   url: `shippingWay`,
+    // }).then((res) => {
+    //   this.shippingWaies = res.data.data.map((item) => {
+    //     return {
+    //       id: item.id,
+    //       name: `${item.ar.name} - ${item.en.name}`,
+    //     };
+    //   });
+    // });
+
+    // Users
+    //   this.$axios({
+    //     method: "GET",
+    //     url: `help-services?type=client`,
+    //   }).then((res) => {
+    //     this.users = res.data.data.map((item) => {
+    //       return {
+    //         id: item.id,
+    //         name: `${item.username}`,
+    //       };
+    //     });
+    //   });
+    // },
+
+    // // ============ Get Run Time Data
+    // getSubCategories() {
+    //   this.$axios({
+    //     method: "GET",
+    //     url: `subCategories/${this.data.category.id}`,
+    //   }).then((res) => {
+    //     this.subCategories = res.data.data.map((item) => {
+    //       return {
+    //         id: item.id,
+    //         name: `${item.ar.name} - ${item.en.name}`,
+    //       };
+    //     });
+    //   });
+    // },
+    // getCities() {
+    //   this.$axios({
+    //     method: "GET",
+    //     url: `cities/${this.data.country.id}`,
+    //   }).then((res) => {
+    //     this.cities = res.data.data.map((item) => {
+    //       return {
+    //         id: item.id,
+    //         name: `${item.ar.name} - ${item.en.name}`,
+    //       };
+    //     });
+    //   });
+    // },
   },
 
   created() {
-    this.getMainData();
+    // this.getMainData();
   },
 };
 </script>

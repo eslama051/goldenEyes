@@ -19,7 +19,6 @@
         :headers="headers"
         :items="rows"
         :search="search"
-        
         :loading="lodaing"
         :loading-text="$t('table.loadingData')"
         v-model="selected"
@@ -257,19 +256,19 @@ export default {
             sortable: false,
           },
           {
-            text: "التقييم",
+            text: "التنصنيف",
             align: "center",
-            value: "rate",
+            value: "category",
             sortable: false,
           },
           {
-            text: "الفئة",
+            text: "السعر",
             align: "center",
             value: "category.ar.name",
             sortable: false,
           },
           {
-            text: "الكمية",
+            text: "اسم الكميه",
             align: "center",
             value: "qty",
             sortable: false,
@@ -284,37 +283,37 @@ export default {
       } else {
         return [
           {
-            text: "Image",
+            text: "The Image",
             align: "center",
             value: "main_image",
             sortable: false,
           },
           {
-            text: "Name",
+            text: "The Name",
             align: "center",
             value: "name",
             sortable: false,
           },
           {
-            text: "Rete",
+            text: "The category",
             align: "center",
-            value: "rate",
+            value: "category",
             sortable: false,
           },
           {
-            text: "Category",
+            text: "The price",
             align: "center",
             value: "category.ar.name",
             sortable: false,
           },
           {
-            text: "Quantity",
+            text: "The Quantity Name",
             align: "center",
             value: "qty",
             sortable: false,
           },
           {
-            text: "control",
+            text: "التحكم",
             value: "actions",
             align: "center",
             sortable: false,

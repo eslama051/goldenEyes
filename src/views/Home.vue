@@ -84,9 +84,9 @@ export default {
   },
   created() {
     // START:: FIRE METHODS
-    this.receiveSocketNotification();
-    if (this.currentUser.token) {
-    }
+    // this.receiveSocketNotification();
+    // if (this.currentUser.token) {
+    // }
     // END:: FIRE METHODS
   },
 };

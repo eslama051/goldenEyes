@@ -83,6 +83,16 @@ import AddAde from "../views/children/Ades/Add.vue";
 import EditAde from "../views/children/Ades/Edit.vue";
 // ========== End Ades ==========
 
+// ========== Start quantities ==========
+import QtiesHome from "../views/children/quantities/Home.vue";
+// Show All
+import AllQties from "../views/children/quantities/ShowAll.vue";
+// Add
+import AddQties from "../views/children/quantities/Add.vue";
+// Edit
+import EditQties from "../views/children/quantities/Edit.vue";
+// ========== End quantities ==========
+
 // ========== Start Permissions ==========
 import PermissionsHome from "../views/children/Permissions/Home.vue";
 // Show All
@@ -448,6 +458,36 @@ window.rootRouter = router = new VueRouter({
           ],
         },
         // ========== End Ades ==========
+
+        // ========== Start quantities ==========
+        {
+          path: "/quantities",
+          component: QtiesHome,
+          children: [
+            // Show All
+            {
+              path: "",
+              name: "AllQties",
+              component: AllQties,
+            },
+
+            // Add
+            {
+              path: "add",
+              name: "AddQties",
+              component: AddQties,
+            },
+            // Edit
+            {
+              path: "edit/:id",
+              name: "EditQties",
+              component: EditQties,
+              props: true,
+            },
+          ],
+        },
+
+        // ========== End quantities ==========
 
         // ========== Start Promo Code ==========
         {

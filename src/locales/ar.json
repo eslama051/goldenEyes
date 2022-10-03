@@ -1,66 +1,8 @@
 {
   "sidebar": [
     {
-      "action": "fal fa-home",
-      "title": "الاحصائيات",
-      "url": "/"
-    },
-
-    {
-      "action": "fal fa-th-large",
-      "parentUrl": "/home_screen",
-      "label": "التصنيفات والإسلايدر",
-      "items": [
-        {
-          "action": "fal fa-images",
-          "items": [
-            {
-              "title": "عرض الكل",
-              "url": "/home_screen/homeFilters"
-            },
-            {
-              "title": "اضافة جديد",
-              "url": "/home_screen/homeFilters/add"
-            }
-          ],
-          "title": "تصنيفات الرئيسية"
-        },
-        {
-          "action": "fal fa-images",
-          "items": [
-            {
-              "title": "عرض الكل",
-              "url": "/home_screen/SubCategories"
-            },
-            {
-              "title": "اضافة جديد",
-              "url": "/home_screen/SubCategories/add"
-            }
-          ],
-          "title": "تصنيفات فرعية"
-        }
-      ],
-      "title": "التصنيفات"
-    },
-    {
-      "action": "fal fa-images",
-      
-      "items": [
-        {
-          "title": "عرض الكل",
-          "url": "/sliders"
-        },
-        {
-          "title": "اضافة جديد",
-          "url": "/sliders/add"
-        }
-      ],
-      "title": "الاسليدر الرئيسي"
-    },
-
-    {
       "action": "fal fa-users",
-      "label": "المستخدمين و المديرين",
+      "label": "  العملاء",
       "items": [
         {
           "title": "عرض الكل",
@@ -71,70 +13,12 @@
           "url": "/clients/add"
         }
       ],
-      "title": "المستخدمين"
-    },
-    {
-      "action": "fal fa-user-tie",
-      "items": [
-        {
-          "title": "عرض الكل",
-          "url": "/admins"
-        },
-        {
-          "title": "اضافة جديد",
-          "url": "/admins/add"
-        }
-      ],
-      "title": "مديرين اللوحة"
-    },
-    {
-      "action": "fal fa-allergies",
-      "items": [
-        {
-          "title": "عرض الكل",
-          "url": "/permissions"
-        },
-        {
-          "title": "اضافة جديد",
-          "url": "/permissions/add"
-        }
-      ],
-      "title": "الصلاحيات"
+      "title": "العملاء"
     },
 
     {
-      "action": "fal fa-globe-africa",
-      "label": "الدول و المدن",
-      "items": [
-        {
-          "title": "عرض الكل",
-          "url": "/countries"
-        },
-        {
-          "title": "اضافة جديد",
-          "url": "/countries/add"
-        }
-      ],
-      "title": "الدول"
-    },
-    {
-      "action": "fal fa-city",
-      "items": [
-        {
-          "title": "عرض الكل",
-          "url": "/cities"
-        },
-        {
-          "title": "اضافة جديد",
-          "url": "/cities/add"
-        }
-      ],
-      "title": "المدن"
-    },
-    
-    {
       "action": "fal fa-ad",
-      "label": "المنتجات و الإعلانات",
+      "label": "المنتجات",
       "items": [
         {
           "title": "عرض الكل",
@@ -147,100 +31,36 @@
       ],
       "title": "المنتجات"
     },
-    {
-      "action": "fal fa-images",
-      "items": [
-        {
-          "title": "عرض الكل",
-          "url": "/home_screen/newCollection"
-        },
-        {
-          "title": "اضافة جديد",
-          "url": "/home_screen/newCollection/add"
-        }
-      ],
-      "title": "الإعلانات"
-    },
 
     {
       "action": "fal fa-database",
-      "label": "الباقات و البرومو كود",
+      "label": "الكميات",
       "items": [
         {
           "title": "عرض الكل",
-          "url": "/packages"
+          "url": "/quantities"
         },
         {
           "title": "اضافة جديد",
-          "url": "/packages/add"
+          "url": "/quantities/add"
         }
       ],
-      "title": "الباقات"
+      "title": "الكميات"
     },
     {
-      "action": "fal fa-tags",
+      "action": "fal fa-database",
+      "label": "الفواتير",
       "items": [
         {
           "title": "عرض الكل",
-          "url": "/promoCode"
+          "url": "/bills"
         },
         {
           "title": "اضافة جديد",
-          "url": "/promoCode/add"
+          "url": "/bills/add"
         }
       ],
-      "title": "برومو كود"
-    },
-
-    {
-      "action": "fal fa-chart-bar",
-      "label": "الحالات و طرق الشحن",
-      "items": [
-        {
-          "title": "عرض الكل",
-          "url": "/status"
-        },
-        {
-          "title": "اضافة جديد",
-          "url": "/status/add"
-        }
-      ],
-      "title": "الحالات"
-    },
-    {
-      "action": "fal fa-truck-moving",
-      "items": [
-        {
-          "title": "عرض الكل",
-          "url": "/shipping"
-        },
-        {
-          "title": "اضافة جديد",
-          "url": "/shipping/add"
-        }
-      ],
-      "title": "طرق الشحن"
-    },
-    
-    {
-      "action": "fal fa-atlas",
-      "label": "الأسئلة الشائعة و الإعدادات",
-      "items": [
-        {
-          "title": "عرض الكل",
-          "url": "/faqs"
-        },
-        {
-          "title": "اضافة جديد",
-          "url": "/faqs/add"
-        }
-      ],
-      "title": "الأسئلة الشائعة"
-    },
-    {
-      "action": "fal fa-cog",
-      "title": "الإعدادات العامة",
-      "url": "/settings"
+      "title": "الفواتير"
     }
   ],
 
@@ -287,13 +107,6 @@
   "breadcrumb": {
     "mainPage": "الصفحة الرئيسية",
 
-    "admins": {
-      "title": "المديرين",
-      "all": "عرض الكل",
-      "add": "اضافة مدير",
-      "edit": "تعديل مدير"
-    },
-
     "clients": {
       "title": "المستخدمين",
       "all": "عرض الكل",
@@ -301,96 +114,25 @@
       "edit": "تعديل مستخدم"
     },
 
-    "permissions": {
-      "title": "الصلاحيات",
-      "all": "عرض الكل",
-      "add": "اضافة صلاحية",
-      "edit": "تعديل صلاحية"
-    },
-
-    "homeFilters": {
-      "title": "تصنيفات الرئيسية",
-      "all": "عرض الكل",
-      "add": "اضافة تصنيف",
-      "edit": "تعديل تصنيف"
-    },
-
-    "SubCategories": {
-      "title": "تصنيفات فرعية",
-      "all": "عرض الكل",
-      "add": "اضافة تصنيف",
-      "edit": "تعديل تصنيف"
-    },
-
     "ades": {
-      "title": "الإعلانات",
+      "title": "المنتجات",
       "all": "عرض الكل",
       "add": "اضافة إعلان",
       "edit": "تعديل إعلان"
     },
-
-    "main_slider": {
-      "title": "الاسليدر الرئيسي",
+    "bills": {
+      "title": "الفواتير",
       "all": "عرض الكل",
-      "add": "اضافة سليدر",
-      "edit": "تعديل سليدر"
+      "add": "اضافة إعلان",
+      "edit": "تعديل إعلان"
+    },
+    "qties": {
+      "title": "الكميات",
+      "all": "عرض الكل",
+      "add": "اضافة كميه",
+      "edit": "تعديل كميه"
     },
 
-    "newCollection": {
-      "title": "الكوليكشن الجديد",
-      "all": "عرض الكل",
-      "add": "اضافة كوليكشن",
-      "edit": "تعديل كوليكشن"
-    },
-
-    "countries": {
-      "title": "الدول",
-      "all": "عرض الكل",
-      "add": "اضافة دولة",
-      "edit": "تعديل دولة"
-    },
-
-    "cities": {
-      "title": "المدن",
-      "all": "عرض الكل",
-      "add": "اضافة مدينة",
-      "edit": "تعديل مدينة"
-    },
-
-    "promo_code": {
-      "title": "برومو كود",
-      "all": "عرض الكل",
-      "add": "اضافة برومو كود",
-      "edit": "تعديل البرومو كود"
-    },
-
-    "status": {
-      "title": "الحالات",
-      "all": "عرض الكل",
-      "add": "اضافة حالة",
-      "edit": "تعديل الحالة"
-    },
-
-    "faqs": {
-      "title": "الأسئلة الشائعة",
-      "all": "عرض الكل",
-      "add": "اضافة سؤال",
-      "edit": "تعديل سؤال"
-    },
-
-    "shipping": {
-      "title": "طرق الشحن",
-      "all": "عرض الكل",
-      "add": "اضافة طريقة شحن",
-      "edit": "تعديل طريقة الشحن"
-    },
-
-    "packages": {
-      "title": "الباقات",
-      "all": "عرض الكل",
-      "add": "اضافة باقة",
-      "edit": "تعديل الباقة"
-    },
     "notifications": {
       "title": "الإشعارات",
       "add": "إرسال إشعار",
@@ -422,6 +164,8 @@
       "date": "التاريخ",
       "start_date": "تاريخ البدء",
       "address": "العنوان",
+      "address_ar": "العنوان (عربي)",
+      "address_en": "العنوان (انجليزي)",
       "title": "العنوان",
       "age": "العمر",
       "userType": "نوع المستخدم",
@@ -463,7 +207,9 @@
       "code": "الكود",
       "duration": "المدة",
       "bit_value": "قيمة المزايدة",
-      "user": "صاحب الاعلان"
+      "user": "صاحب الاعلان",
+      "taxNumber": "الرقم الضريبي",
+      "qtyName": "اسم الكميه"
     },
     "validation": {
       "image": "حقل الصورة مطلوب",

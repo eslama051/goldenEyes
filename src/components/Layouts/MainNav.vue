@@ -268,7 +268,7 @@ export default {
       }
     });
 
-    this.get_notifications();
+    // this.get_notifications();
   },
 };
 </script>

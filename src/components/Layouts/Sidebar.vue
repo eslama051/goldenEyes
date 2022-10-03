@@ -31,10 +31,10 @@
 
       <v-list>
         <template v-for="item in sidebar">
-           <!-- divider  -->
-           <div class="divider_new" v-if="item.label" :key="item.id">
+          <!-- divider  -->
+          <!-- <div class="divider_new" v-if="item.label" :key="item.id">
             <span>{{ item.label }}</span>
-          </div>
+          </div> -->
           <!-- If Single Item (Not Dropdown) -->
           <v-list-item v-if="item.url != null" :key="item.id" :to="item.url">
             <v-icon>{{ item.action }}</v-icon>

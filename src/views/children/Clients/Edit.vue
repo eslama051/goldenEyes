@@ -13,14 +13,8 @@
       <form @submit.prevent="validateCreateForm">
         <div class="container">
           <div class="row justify-content-between">
-            <!-- Image -->
-            <uplode-image
-              :data_src="data.image"
-              @inputChanged="uplodeImg_1"
-            ></uplode-image>
-
-            <!-- Name -->
-            <div class="col-lg-12 py-0">
+            <!-- Name ar-->
+            <div class="col-md-6 py-0">
               <div class="input_wrapper top_label">
                 <input
                   type="text"
@@ -29,134 +23,74 @@
                   v-model.trim="data.name"
                 />
                 <label for="name_input" class="form-label">{{
-                  $t("forms.labels.name")
+                  $t("forms.labels.name_ar")
                 }}</label>
               </div>
             </div>
-
-            <!-- Phone -->
+            <!-- Name en-->
+            <div class="col-md-6 py-0">
+              <div class="input_wrapper top_label">
+                <input
+                  type="text"
+                  class="form-control"
+                  @input="helper_checkIfInputIsEmpty"
+                  v-model.trim="data.name"
+                />
+                <label for="name_input" class="form-label">{{
+                  $t("forms.labels.name_en")
+                }}</label>
+              </div>
+            </div>
+            <!-- adress -->
+            <div class="col-md-6 py-0">
+              <div class="input_wrapper top_label">
+                <input
+                  type="text"
+                  class="form-control"
+                  @input="helper_checkIfInputIsEmpty"
+                  v-model.trim="data.adress"
+                />
+                <label for="name_input" class="form-label">{{
+                  $t("forms.labels.address_ar")
+                }}</label>
+              </div>
+            </div>
+            <!-- adress -->
+            <div class="col-md-6 py-0">
+              <div class="input_wrapper top_label">
+                <input
+                  type="text"
+                  class="form-control"
+                  @input="helper_checkIfInputIsEmpty"
+                  v-model.trim="data.adress"
+                />
+                <label for="name_input" class="form-label">{{
+                  $t("forms.labels.address_en")
+                }}</label>
+              </div>
+            </div>
+            <!-- tax number -->
             <div class="col-lg-12 py-0">
               <div class="input_wrapper top_label">
                 <input
-                  type="number"
+                  type="text"
                   class="form-control"
                   @input="helper_checkIfInputIsEmpty"
-                  v-model.trim="data.phone"
+                  v-model.trim="data.adress"
                 />
                 <label for="name_input" class="form-label">{{
-                  $t("forms.labels.phone")
+                  $t("forms.labels.taxNumber")
                 }}</label>
               </div>
-            </div>
-
-            <!-- Email -->
-            <div class="col-lg-12 py-0">
-              <div class="input_wrapper top_label">
-                <input
-                  type="email"
-                  class="form-control"
-                  @input="helper_checkIfInputIsEmpty"
-                  v-model.trim="data.email"
-                />
-                <label for="name_input" class="form-label">{{
-                  $t("forms.labels.email")
-                }}</label>
-              </div>
-            </div>
-
-            <!-- Password -->
-            <div class="col-lg-12 py-0">
-              <div class="input_wrapper top_label">
-                <input
-                  type="password"
-                  class="form-control"
-                  @input="helper_checkIfInputIsEmpty"
-                  v-model.trim="data.password"
-                />
-                <label for="name_input" class="form-label">{{
-                  $t("forms.labels.password")
-                }}</label>
-              </div>
-            </div>
-
-            <!-- Country && City -->
-            <!-- <div class="col-lg-6 py-0">
-              <div class="input_wrapper top_label">
-                <label class="form-label">{{
-                  $t("forms.labels.country")
-                }}</label>
-                <multiselect
-                  @select="getCities"
-                  v-model="data.country"
-                  :options="countries"
-                  label="name"
-                  track-by="id"
-                  placeholder=" "
-                  :searchable="true"
-                  :allow-empty="false"
-                  :show-labels="false"
-                >
-                </multiselect>
-              </div>
-            </div>
-            <div class="col-lg-6 py-0">
-              <div
-                class="input_wrapper top_label"
-                :class="{ disabled: !data.country }"
-              >
-                <label class="form-label">{{ $t("forms.labels.city") }}</label>
-                <multiselect
-                  v-model="data.city"
-                  :options="cities"
-                  label="name"
-                  track-by="id"
-                  placeholder=" "
-                  :searchable="true"
-                  :allow-empty="false"
-                  :show-labels="false"
-                >
-                </multiselect>
-              </div>
-            </div> -->
-
-            <!-- Is_Ban -->
-            <div class="col-lg-6 py-0">
-              <v-checkbox
-                @change="!data.is_ban ? (data.ban_reason = '') : ''"
-                :label="$t('forms.labels.is_ban')"
-                v-model="data.is_ban"
-                color="indigo lighten-2"
-              ></v-checkbox>
-            </div>
-
-            <!-- Is_Active -->
-            <div class="col-lg-6 py-0">
-              <v-checkbox
-                :label="$t('forms.labels.is_active')"
-                v-model="data.is_active"
-                color="indigo lighten-2"
-              ></v-checkbox>
-            </div>
-
-            <!-- Ban_Reason -->
-            <div
-              class="input_wrapper top_label"
-              :class="{ disabled: !data.is_ban }"
-            >
-              <label for="textarea_1" class="form-label">{{
-                $t("forms.labels.ban_reason")
-              }}</label>
-              <textarea
-                v-model="data.ban_reason"
-                class="form-control"
-                rows="5"
-              ></textarea>
             </div>
           </div>
         </div>
 
         <div class="buttons_wrapper">
-          <button class="button_style_1" :class="btnIsLoading ? 'disabled' : ''">
+          <button
+            class="button_style_1"
+            :class="btnIsLoading ? 'disabled' : ''"
+          >
             {{ $t("forms.submit") }}
             <span class="btn_loader" v-if="btnIsLoading"></span>
           </button>

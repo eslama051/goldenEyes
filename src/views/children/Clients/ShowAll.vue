@@ -19,7 +19,6 @@
         :headers="headers"
         :items="rows"
         :search="search"
-        
         :loading="lodaing"
         :loading-text="$t('table.loadingData')"
         v-model="selected"
@@ -32,35 +31,15 @@
         <!-- ================== You Can use any slots you want ================== -->
         <!-- ====== Select row field ====== -->
         <!-- Image -->
-        <template v-slot:[`item.image`]="{ item }">
-          <img @click="show_model_1" class="image" :src="item.image" />
-        </template>
 
         <!-- Select no data State -->
         <template v-slot:no-data>
           {{ $t("table.noData") }}
         </template>
 
-        <!-- IsActive -->
-        <template v-slot:[`item.is_active`]="{ item }">
-          <v-chip :color="!item.is_active ? 'red' : 'green'">
-            {{ item.is_active ? $t("active") : $t("inactive") }}
-          </v-chip>
-        </template>
-
-        <!-- IsActive -->
-        <template v-slot:[`item.is_ban`]="{ item }">
-          <v-chip :color="!item.is_ban ? 'green' : 'red'">
-            {{ item.is_ban ? $t("ban") : $t("inban") }}
-          </v-chip>
-        </template>
-
         <!-- Select actions-->
         <template v-slot:[`item.actions`]="{ item }">
           <div class="_actions">
-            <v-icon class="show" small @click="showItem(item)">
-              fal fa-eye
-            </v-icon>
             <v-icon class="edit" small @click="editItem(item)">
               fal fa-edit
             </v-icon>
@@ -194,12 +173,12 @@ export default {
           href: "/",
         },
         {
-          text: this.$t("breadcrumb.admins.title"),
+          text: this.$t("breadcrumb.clients.title"),
           disabled: false,
-          href: "/sliders",
+          href: "/clients",
         },
         {
-          text: this.$t("breadcrumb.admins.all"),
+          text: this.$t("breadcrumb.clients.all"),
           disabled: true,
           href: "",
         },
@@ -245,9 +224,9 @@ export default {
   },
 
   watch: {
-    [`paginations.current_page`]() {
-      this.setRows();
-    },
+    // [`paginations.current_page`]() {
+    //   this.setRows();
+    // },
   },
 
   computed: {
@@ -258,26 +237,15 @@ export default {
     headers() {
       if (this.lang == "ar") {
         return [
+          { text: "الاسم", value: "name", align: "center" },
           {
-            text: "الصورة",
-            align: "center",
-            value: "image",
-            sortable: false,
-          },
-          { text: "الاسم", value: "username", align: "center" },
-          {
-            text: "الهاتف",
-            value: "phone",
+            text: "عنوان",
+            value: "address",
             align: "center",
           },
           {
-            text: "مفعل؟",
-            value: "is_active",
-            align: "center",
-          },
-          {
-            text: "محظور؟",
-            value: "is_ban",
+            text: "رقم ضريبي",
+            value: "tax_number",
             align: "center",
           },
           {
@@ -289,28 +257,18 @@ export default {
         ];
       } else {
         return [
+          { text: "Name", value: "name", align: "center" },
           {
-            text: "image",
-            align: "center",
-            value: "image",
-            sortable: false,
-          },
-          { text: "Name", value: "UserName", align: "center" },
-          {
-            text: "Phone",
-            value: "phone",
+            text: "Address",
+            value: "address",
             align: "center",
           },
           {
-            text: "Active?",
-            value: "is_active",
+            text: "Amounts",
+            value: "tax_number",
             align: "center",
           },
-          {
-            text: "IsBan?",
-            value: "is_ban",
-            align: "center",
-          },
+
           {
             text: "control",
             value: "actions",
@@ -415,15 +373,16 @@ export default {
       this.$axios({
         method: "GET",
         url: "client",
-        params: { page: this.paginations.current_page },
+        // params: { page: this.paginations.current_page },
       })
         .then((res) => {
-          this.paginations.last_page = res.data.meta.last_page;
-          this.paginations.items_per_page = res.data.meta.per_page;
+          // this.paginations.last_page = res.data.meta.last_page;
+          // this.paginations.items_per_page = res.data.meta.per_page;
 
           this.rows = res.data.data;
+          console.log(res.data.data);
 
-          this.statisticsItem.number = res.data.meta.total;
+          // this.statisticsItem.number = res.data.meta.total;
 
           this.lodaing = false;
         })

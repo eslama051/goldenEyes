@@ -37,7 +37,6 @@ export default {
     //   const collection = document.getElementsByClassName("button_style_1");
     //   collection[0].setAttribute("disabled", "true");
     // }
-    
   },
 };
 </script>
