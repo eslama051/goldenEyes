@@ -14,7 +14,18 @@
         <div class="container">
           <div class="row justify-content-between">
             <!-- Images -->
-            <uplode-image-2 @inputChanged="image_uploded"></uplode-image-2>
+            <uplode-image-2
+              @inputChanged="logo_uploded"
+              label="LOGO"
+            ></uplode-image-2>
+            <uplode-image-2
+              @inputChanged="header_uploded"
+              label="HEADER"
+            ></uplode-image-2>
+            <uplode-image-2
+              @inputChanged="footer_uploded"
+              label="FOOTER"
+            ></uplode-image-2>
 
             <!-- Name ar-->
             <div class="col-md-6 py-0">
@@ -23,30 +34,119 @@
                   type="text"
                   class="form-control"
                   @input="helper_checkIfInputIsEmpty"
-                  v-model.trim="data.name"
+                  v-model.trim="data.nameAr"
                 />
                 <label for="name_input" class="form-label">{{
                   $t("forms.labels.name_ar")
                 }}</label>
               </div>
             </div>
-            <!-- Name en
+            <!-- Name en -->
             <div class="col-md-6 py-0">
               <div class="input_wrapper top_label">
                 <input
                   type="text"
                   class="form-control"
                   @input="helper_checkIfInputIsEmpty"
-                  v-model.trim="data.name_en"
+                  v-model.trim="data.nameEn"
                 />
                 <label for="name_input" class="form-label">{{
                   $t("forms.labels.name_en")
                 }}</label>
               </div>
-            </div> -->
+            </div>
 
-            <!-- category -->
-            <div class="col-md-6">
+            <!-- fake Name  -->
+            <div class="col-md-6 py-0">
+              <div class="input_wrapper top_label">
+                <input
+                  type="text"
+                  class="form-control"
+                  @input="helper_checkIfInputIsEmpty"
+                  v-model.trim="data.fake_name"
+                />
+                <label for="name_input" class="form-label">{{
+                  $t("forms.labels.fake_name")
+                }}</label>
+              </div>
+            </div>
+            <!-- sequence  -->
+            <div class="col-md-6 py-0">
+              <div class="input_wrapper top_label">
+                <input
+                  type="number"
+                  class="form-control"
+                  @input="helper_checkIfInputIsEmpty"
+                  v-model.trim="data.sequence"
+                />
+                <label for="name_input" class="form-label">{{
+                  $t("forms.labels.sequence")
+                }}</label>
+              </div>
+            </div>
+
+            <!-- address  -->
+            <div class="col-md-6 py-0">
+              <div class="input_wrapper top_label">
+                <input
+                  type="text"
+                  class="form-control"
+                  @input="helper_checkIfInputIsEmpty"
+                  v-model.trim="data.address"
+                />
+                <label for="name_input" class="form-label">{{
+                  $t("forms.labels.address")
+                }}</label>
+              </div>
+            </div>
+
+            <!-- tax_number  -->
+            <div class="col-md-6 py-0">
+              <div class="input_wrapper top_label">
+                <input
+                  type="text"
+                  class="form-control"
+                  @input="helper_checkIfInputIsEmpty"
+                  v-model.trim="data.tax_number"
+                />
+                <label for="name_input" class="form-label">{{
+                  $t("forms.labels.tax_number")
+                }}</label>
+              </div>
+            </div>
+
+            <!-- commercial_number  -->
+            <div class="col-md-6 py-0">
+              <div class="input_wrapper top_label">
+                <input
+                  type="text"
+                  class="form-control"
+                  @input="helper_checkIfInputIsEmpty"
+                  v-model.trim="data.commercial_number"
+                />
+                <label for="name_input" class="form-label">{{
+                  $t("forms.labels.commercial_number")
+                }}</label>
+              </div>
+            </div>
+
+            <!-- companies_accounts  -->
+            <div class="col-md-6 py-0">
+              <div class="input_wrapper top_label">
+                <input
+                  type="text"
+                  class="form-control"
+                  @input="helper_checkIfInputIsEmpty"
+                  v-model.trim="data.companies_accounts"
+                />
+                <label for="name_input" class="form-label">{{
+                  $t("forms.labels.companies_accounts")
+                }}</label>
+              </div>
+            </div>
+
+            <!--  category -->
+            <div class="col-12">
               <div class="input_wrapper top_label">
                 <label class="form-label">{{
                   $t("forms.labels.category")
@@ -57,46 +157,11 @@
                   label="name"
                   track-by="id"
                   placeholder=" "
-                  :searchable="true"
-                  :allow-empty="false"
-                  :show-labels="false"
-                >
-                </multiselect>
-              </div>
-            </div>
-
-            <!-- qunatity name -->
-            <div class="col-md-6">
-              <div class="input_wrapper top_label">
-                <label class="form-label">{{
-                  $t("forms.labels.qtyName")
-                }}</label>
-                <multiselect
-                  v-model="data.qtyName"
-                  :options="quantityNames"
-                  label="name"
-                  track-by="id"
-                  placeholder=" "
                   :qtyle="true"
                   :allow-empty="false"
                   :show-labels="false"
                 >
                 </multiselect>
-              </div>
-            </div>
-
-            <!-- price -->
-            <div class="col-md-6">
-              <div class="input_wrapper top_label">
-                <input
-                  type="number"
-                  class="form-control"
-                  @input="helper_checkIfInputIsEmpty"
-                  v-model.trim="data.price"
-                />
-                <label for="name_input" class="form-label">{{
-                  $t("forms.labels.price")
-                }}</label>
               </div>
             </div>
           </div>
@@ -147,11 +212,18 @@ export default {
 
       // ========== create_data
       data: {
-        image: null,
-        name: null,
+        fake_name: null,
+        logo: null,
+        header: null,
+        footer: null,
+        sequence: null,
+        address: null,
+        tax_number: null,
+        commercial_number: null,
+        companies_accounts: null,
+        nameAr: null,
+        nameEn: null,
         category: null,
-        price: null,
-        qtyName: null,
       },
 
       // Menues
@@ -179,9 +251,17 @@ export default {
 
   methods: {
     // Uplode Images
-    image_uploded(payload) {
-      this.data.image = payload;
+    logo_uploded(payload) {
+      this.data.logo = payload;
+      console.log(payload);
     },
+    header_uploded(payload) {
+      this.data.header = payload;
+    },
+    footer_uploded(payload) {
+      this.data.footer = payload;
+    },
+
     images_uploded(imgs) {
       this.data.images = imgs
         .filter((img) => {
@@ -211,18 +291,82 @@ export default {
     validateCreateForm() {
       this.btnIsLoading = true;
 
-      if (!this.data.image) {
+      if (!this.data.logo) {
         this.$iziToast.error({
           timeout: 2000,
-          message: this.$t("forms.validation.image"),
+          message: this.$t("forms.validation.logo"),
           position: "bottomRight",
         });
         this.btnIsLoading = false;
         return;
-      } else if (!this.data.name) {
+      } else if (!this.data.header) {
         this.$iziToast.error({
           timeout: 2000,
-          message: this.$t("forms.validation.name"),
+          message: this.$t("forms.validation.header"),
+          position: "bottomRight",
+        });
+        this.btnIsLoading = false;
+        return;
+      } else if (!this.data.footer) {
+        this.$iziToast.error({
+          timeout: 2000,
+          message: this.$t("forms.validation.footer"),
+          position: "bottomRight",
+        });
+        this.btnIsLoading = false;
+        return;
+      } else if (!this.data.nameAr) {
+        this.$iziToast.error({
+          timeout: 2000,
+          message: this.$t("forms.validation.name_ar"),
+          position: "bottomRight",
+        });
+        this.btnIsLoading = false;
+        return;
+      } else if (!this.data.nameEn) {
+        this.$iziToast.error({
+          timeout: 2000,
+          message: this.$t("forms.validation.name_en"),
+          position: "bottomRight",
+        });
+        this.btnIsLoading = false;
+        return;
+      } else if (!this.data.fake_name) {
+        this.$iziToast.error({
+          timeout: 2000,
+          message: this.$t("forms.validation.fake_name"),
+          position: "bottomRight",
+        });
+        this.btnIsLoading = false;
+        return;
+      } else if (!this.data.sequence) {
+        this.$iziToast.error({
+          timeout: 2000,
+          message: this.$t("forms.validation.sequence"),
+          position: "bottomRight",
+        });
+        this.btnIsLoading = false;
+        return;
+      } else if (!this.data.address) {
+        this.$iziToast.error({
+          timeout: 2000,
+          message: this.$t("forms.validation.address"),
+          position: "bottomRight",
+        });
+        this.btnIsLoading = false;
+        return;
+      } else if (!this.data.tax_number) {
+        this.$iziToast.error({
+          timeout: 2000,
+          message: this.$t("forms.validation.tax_number"),
+          position: "bottomRight",
+        });
+        this.btnIsLoading = false;
+        return;
+      } else if (!this.data.commercial_number) {
+        this.$iziToast.error({
+          timeout: 2000,
+          message: this.$t("forms.validation.commercial_number"),
           position: "bottomRight",
         });
         this.btnIsLoading = false;
@@ -231,22 +375,6 @@ export default {
         this.$iziToast.error({
           timeout: 2000,
           message: this.$t("forms.validation.category"),
-          position: "bottomRight",
-        });
-        this.btnIsLoading = false;
-        return;
-      } else if (!this.data.qtyName) {
-        this.$iziToast.error({
-          timeout: 2000,
-          message: this.$t("forms.validation.qtyName"),
-          position: "bottomRight",
-        });
-        this.btnIsLoading = false;
-        return;
-      } else if (!this.data.price) {
-        this.$iziToast.error({
-          timeout: 2000,
-          message: this.$t("forms.validation.price"),
           position: "bottomRight",
         });
         this.btnIsLoading = false;
@@ -260,37 +388,23 @@ export default {
     // Submit Data
     submitData() {
       const submit_data = new FormData();
-      submit_data.append("main_image", this.data.image.img_file);
-      this.data.images.forEach((img, index) => {
-        submit_data.append(`images[${index}]`, img);
-      });
-
-      submit_data.append("name", this.data.name);
-      submit_data.append("desc", this.data.desc);
-      submit_data.append("qty", this.data.amountLeft);
-
-      submit_data.append("user_id", this.data.user.id);
+      console.log(this.data.category);
+      submit_data.append("logo", this.data.logo.img_file);
+      submit_data.append("header", this.data.header.img_file);
+      submit_data.append("footer", this.data.footer.img_file);
+      submit_data.append("ar[name]", this.data.nameAr);
+      submit_data.append("en[name]", this.data.nameEn);
+      submit_data.append("fake_name", this.data.fake_name);
+      submit_data.append("sequence", this.data.sequence);
+      submit_data.append("address", this.data.address);
+      submit_data.append("tax_number", this.data.tax_number);
+      submit_data.append("commercial_number", this.data.commercial_number);
+      submit_data.append("companies_accounts", this.data.companies_accounts);
       submit_data.append("category_id", this.data.category.id);
-      submit_data.append("sub_category_id", this.data.subCategorie.id);
-      submit_data.append("country_id", this.data.country.id);
-      submit_data.append("city_id", this.data.city.id);
-      submit_data.append("shipping_way_id", this.data.shippingWay.id);
-      submit_data.append("product_status_id", this.data.status.id);
-
-      if (this.data.productRadio == "isDirectSell") {
-        submit_data.append("is_direct_sale", 1);
-        submit_data.append("product_price", this.data.sellPrice);
-      } else {
-        submit_data.append("is_bid", 1);
-        submit_data.append("start_bid_date", this.data.start_date);
-        submit_data.append("end_bid_date", this.data.end_date);
-        submit_data.append("bid_price", this.data.start_price);
-        submit_data.append("bid_value", this.data.bit_value);
-      }
 
       this.$axios({
         method: "POST",
-        url: "product",
+        url: "company",
         data: submit_data,
       })
         .then(() => {
@@ -299,7 +413,7 @@ export default {
             message: this.$t("addSuccess"),
             position: "bottomRight",
           });
-          this.$router.push({ path: "/ades" });
+          this.$router.push({ path: "/companies" });
           this.btnIsLoading = false;
         })
         .catch((err) => {
@@ -329,7 +443,6 @@ export default {
     // ============ Get Main Data
     getMainData() {
       // categories
-
       this.$axios({
         method: "GET",
         url: `category`,
@@ -337,18 +450,7 @@ export default {
         this.categories = res.data.data.map((item) => {
           return {
             id: item.id,
-            name: `${item.name}`,
-          };
-        });
-      });
-      this.$axios({
-        method: "GET",
-        url: `quantity`,
-      }).then((res) => {
-        this.quantityNames = res.data.data.map((item) => {
-          return {
-            id: item.id,
-            name: `${item.name}`,
+            name: `${item.ar.name} - ${item.en.name} `,
           };
         });
       });

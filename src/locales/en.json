@@ -270,7 +270,9 @@
       "use": "Please enter the number of times you want to use",
       "duration": "Please enter the duration",
       "bit_value": "The Bid Value field is required",
-      "user": "Please choose the owner of the ad"
+      "user": "Please choose the owner of the ad",
+      "qtyName": "please choose the quantity name",
+      "price": "The price field is required"
     },
     "submit": "save",
     "login": "login"

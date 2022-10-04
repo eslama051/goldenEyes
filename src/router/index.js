@@ -21,13 +21,13 @@ import EditFilter from "../views/children/HomePage/HomeFilters/Edit.vue";
 // **** End Home Filters
 
 // **** Start Sub_Category
-import SubCategory from "../views/children/HomePage/SubCategories/Home.vue";
+import Category from "../views/children/categories/Home.vue";
 // Show All
-import AllSubCategories from "../views/children/HomePage/SubCategories/ShowAll.vue";
+import AllCategories from "../views/children/categories/ShowAll.vue";
 // Add
-import AddSubCategory from "../views/children/HomePage/SubCategories/Add.vue";
+import AddCategory from "../views/children/categories/Add.vue";
 // Edit
-import EditSubCategory from "../views/children/HomePage/SubCategories/Edit.vue";
+import EditCategory from "../views/children/categories/Edit.vue";
 // **** End Sub_Category
 
 // **** Start NewCollection
@@ -203,6 +203,18 @@ import ClientCards from "../views/children/Clients/AdminProfile/children/Cards.v
 import ClientPersonalData from "../views/children/Clients/AdminProfile/children/PersonalData.vue";
 // ========== End Clients ==========
 
+// ========== Start companies ==========
+// Crud
+import CompanyHome from "../views/children/companies/Home.vue";
+import AllCompanies from "../views/children/companies/ShowAll.vue";
+import AddCompany from "../views/children/companies/Add.vue";
+import EditCompany from "../views/children/companies/Edit.vue";
+import CompanyShowHome from "../views/children/companies/CompanyShowHome.vue";
+import CompanyCard from "../views/children/companies/children/Cards.vue";
+import CompanyData from "../views/children/companies/children/PersonalData.vue";
+
+// ========== End companies ==========
+
 // ********** Auth
 import Login from "../views/Auth/Login.vue";
 
@@ -227,6 +239,28 @@ window.rootRouter = router = new VueRouter({
           path: "/",
           name: "HomePage",
           component: HomePage,
+        },
+        {
+          path: "categories",
+          component: Category,
+          children: [
+            {
+              path: "",
+              name: "AllCategories",
+              component: AllCategories,
+            },
+            {
+              path: "add",
+              name: "AddCategory",
+              component: AddCategory,
+            },
+            {
+              path: "edit/:id",
+              name: "EditCategory",
+              component: EditCategory,
+              props: true,
+            },
+          ],
         },
 
         // ========== Start HomePage ==========
@@ -286,28 +320,6 @@ window.rootRouter = router = new VueRouter({
             },
 
             // SubCategories
-            {
-              path: "SubCategories",
-              component: SubCategory,
-              children: [
-                {
-                  path: "",
-                  name: "AllSubCategories",
-                  component: AllSubCategories,
-                },
-                {
-                  path: "add",
-                  name: "AddSubCategory",
-                  component: AddSubCategory,
-                },
-                {
-                  path: "edit/:id",
-                  name: "EditSubCategory",
-                  component: EditSubCategory,
-                  props: true,
-                },
-              ],
-            },
           ],
         },
         // ========== End HomePage ==========
@@ -339,6 +351,51 @@ window.rootRouter = router = new VueRouter({
           ],
         },
         // ========== End Main_Slider ==========
+
+        // ========== Start Admins ==========
+        {
+          path: "/companies",
+          component: CompanyHome,
+          children: [
+            {
+              path: "",
+              name: "AllCompany",
+              component: AllCompanies,
+            },
+            {
+              path: "add",
+              name: "AddCompany",
+              component: AddCompany,
+            },
+            {
+              path: "edit/:id",
+              name: "EditCompany",
+              component: EditCompany,
+              props: true,
+            },
+            // Show Admin
+            {
+              path: "show/:id",
+              component: CompanyShowHome,
+              props: true,
+              children: [
+                {
+                  path: "",
+                  name: "CompanyCards",
+                  component: CompanyCard,
+                  props: true,
+                },
+                {
+                  path: "data",
+                  name: "PersonalData",
+                  component: CompanyData,
+                  props: true,
+                },
+              ],
+            },
+          ],
+        },
+        // ========== End Admins ==========
 
         // ========== Start Countries ==========
         {
@@ -845,27 +902,27 @@ window.rootRouter = router = new VueRouter({
 
 const TOKEN = store.getters["auth_module/currentUser"].token;
 
-router.beforeEach((to, _2, next) => {
-  // if(to){
-  //   console.log(document.querySelector(".btn_loader"));
-  //   // ===> Add Overlay at button submit
-  //   if (document.getElementsByClassName("btn_loader").length != 0) {
-  //     const collection = document.getElementsByClassName("button_style_1");
-  //     collection[0].setAttribute("disabled", "true");
-  //   }
-  //   next();
-  // }
-  if (to.name !== "Login" && !TOKEN) {
-    next({ name: "Login" });
-  } else if (to.name == "Login" && TOKEN) {
-    next("/");
-  } else if (to.name == "Login" || to.name == "NotFound") {
-    store.dispatch("sideNav_module/reseatBodyPadding");
-    next();
-  } else {
-    next();
-  }
-});
+// router.beforeEach((to, _2, next) => {
+//   // if(to){
+//   //   console.log(document.querySelector(".btn_loader"));
+//   //   // ===> Add Overlay at button submit
+//   //   if (document.getElementsByClassName("btn_loader").length != 0) {
+//   //     const collection = document.getElementsByClassName("button_style_1");
+//   //     collection[0].setAttribute("disabled", "true");
+//   //   }
+//   //   next();
+//   // }
+//   if (to.name !== "Login" && !TOKEN) {
+//     next({ name: "Login" });
+//   } else if (to.name == "Login" && TOKEN) {
+//     next("/");
+//   } else if (to.name == "Login" || to.name == "NotFound") {
+//     store.dispatch("sideNav_module/reseatBodyPadding");
+//     next();
+//   } else {
+//     next();
+//   }
+// });
 
 Vue.use(VueRouter);
 export default router;

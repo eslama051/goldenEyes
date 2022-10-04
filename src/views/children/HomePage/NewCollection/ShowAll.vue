@@ -19,7 +19,6 @@
         :headers="headers"
         :items="rows"
         :search="search"
-        
         :loading="lodaing"
         :loading-text="$t('table.loadingData')"
         v-model="selected"
@@ -342,8 +341,9 @@ export default {
     deleteItemConfirm() {
       this.$axios({
         method: "DELETE",
-        url: `ad/${this.itemtoDelete.id}`,
+        url: `category/${this.itemtoDelete.id}`,
       })
+
         .then(() => {
           this.rows = this.rows.filter((item) => {
             return item.id != this.itemtoDelete.id;

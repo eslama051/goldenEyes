@@ -13,10 +13,7 @@
       <form @submit.prevent="validateCreateForm">
         <div class="container">
           <div class="row justify-content-between">
-            <!-- Image -->
-            <!-- <uplode-image @inputChanged="uplodeImg_1"></uplode-image> -->
-
-            <div class="col-md-6 py-0">
+            <div class="col-lg-6 py-0">
               <div class="input_wrapper top_label">
                 <input
                   type="text"
@@ -30,7 +27,7 @@
               </div>
             </div>
 
-            <div class="col-md-6 py-0">
+            <div class="col-lg-6 py-0">
               <div class="input_wrapper top_label">
                 <input
                   type="text"
@@ -40,6 +37,19 @@
                 />
                 <label for="name_input" class="form-label">{{
                   $t("forms.labels.name_en")
+                }}</label>
+              </div>
+            </div>
+            <div class="col-lg-12 py-0">
+              <div class="input_wrapper top_label">
+                <input
+                  type="number"
+                  class="form-control"
+                  @input="helper_checkIfInputIsEmpty"
+                  v-model.trim="data.order"
+                />
+                <label for="name_input" class="form-label">{{
+                  $t("forms.labels.order")
                 }}</label>
               </div>
             </div>
@@ -75,12 +85,12 @@ export default {
           href: "/",
         },
         {
-          text: this.$t("breadcrumb.qties.title"),
+          text: this.$t("breadcrumb.categories.title"),
           disabled: false,
-          href: "/quantities",
+          href: "/categories",
         },
         {
-          text: this.$t("breadcrumb.qties.add"),
+          text: this.$t("breadcrumb.categories.add"),
           disabled: true,
           href: "",
         },
@@ -91,10 +101,13 @@ export default {
 
       // ========== create_data
       data: {
-        image: null,
-        ar: { name: null, nationality: null, currency: null },
-        en: { name: null, nationality: null, currency: null },
-        phone_code: null,
+        ar: {
+          name: null,
+        },
+        en: {
+          name: null,
+        },
+        order: null,
       },
     };
   },
@@ -109,15 +122,6 @@ export default {
     validateCreateForm() {
       this.btnIsLoading = true;
 
-      // if (!this.data.image?.img_src) {
-      //   this.$iziToast.error({
-      //     timeout: 2000,
-      //     message: this.$t("forms.validation.image"),
-      //     position: "bottomRight",
-      //   });
-      //   this.btnIsLoading = false;
-      //   return;
-      // } else
       if (!this.data.ar.name) {
         this.$iziToast.error({
           timeout: 2000,
@@ -134,49 +138,15 @@ export default {
         });
         this.btnIsLoading = false;
         return;
-      }
-      // else if (!this.data.ar.nationality) {
-      //   this.$iziToast.error({
-      //     timeout: 2000,
-      //     message: this.$t("forms.validation.nationality_ar"),
-      //     position: "bottomRight",
-      //   });
-      //   this.btnIsLoading = false;
-      //   return;
-      // } else if (!this.data.en.nationality) {
-      //   this.$iziToast.error({
-      //     timeout: 2000,
-      //     message: this.$t("forms.validation.nationality_en"),
-      //     position: "bottomRight",
-      //   });
-      //   this.btnIsLoading = false;
-      //   return;
-      // } else if (!this.data.ar.currency) {
-      //   this.$iziToast.error({
-      //     timeout: 2000,
-      //     message: this.$t("forms.validation.currency_ar"),
-      //     position: "bottomRight",
-      //   });
-      //   this.btnIsLoading = false;
-      //   return;
-      // } else if (!this.data.en.currency) {
-      //   this.$iziToast.error({
-      //     timeout: 2000,
-      //     message: this.$t("forms.validation.currency_en"),
-      //     position: "bottomRight",
-      //   });
-      //   this.btnIsLoading = false;
-      //   return;
-      // } else if (!this.data.phone_code) {
-      //   this.$iziToast.error({
-      //     timeout: 2000,
-      //     message: this.$t("forms.validation.phone_code"),
-      //     position: "bottomRight",
-      //   });
-      //   this.btnIsLoading = false;
-      //   return;
-      // }
-      else {
+      } else if (!this.data.order) {
+        this.$iziToast.error({
+          timeout: 2000,
+          message: this.$t("forms.validation.order"),
+          position: "bottomRight",
+        });
+        this.btnIsLoading = false;
+        return;
+      } else {
         this.submitData();
         return;
       }
@@ -185,18 +155,14 @@ export default {
     // Submit Data
     submitData() {
       const submit_data = new FormData();
-      // submit_data.append("flag", this.data.image.img_file);
+
       submit_data.append("ar[name]", this.data.ar.name);
       submit_data.append("en[name]", this.data.en.name);
-      // submit_data.append("ar[nationality]", this.data.ar.nationality);
-      // submit_data.append("en[nationality]", this.data.en.nationality);
-      // submit_data.append("ar[currency]", this.data.ar.currency);
-      // submit_data.append("en[currency]", this.data.en.currency);
-      // submit_data.append("phonecode", this.data.phone_code);
+      submit_data.append("order", this.data.order);
 
       this.$axios({
         method: "POST",
-        url: "country",
+        url: "category",
         data: submit_data,
       })
         .then(() => {
@@ -205,7 +171,7 @@ export default {
             message: this.$t("addSuccess"),
             position: "bottomRight",
           });
-          this.$router.push({ path: "/countries" });
+          this.$router.push({ path: "/categories" });
           this.btnIsLoading = false;
         })
         .catch((err) => {

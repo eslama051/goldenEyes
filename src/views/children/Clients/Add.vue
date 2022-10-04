@@ -23,12 +23,12 @@
                   v-model.trim="data.name"
                 />
                 <label for="name_input" class="form-label">{{
-                  $t("forms.labels.name_ar")
+                  $t("forms.labels.name")
                 }}</label>
               </div>
             </div>
             <!-- Name en-->
-            <div class="col-md-6 py-0">
+            <!-- <div class="col-md-6 py-0">
               <div class="input_wrapper top_label">
                 <input
                   type="text"
@@ -40,7 +40,7 @@
                   $t("forms.labels.name_en")
                 }}</label>
               </div>
-            </div>
+            </div> -->
             <!-- adress -->
             <div class="col-md-6 py-0">
               <div class="input_wrapper top_label">
@@ -48,27 +48,14 @@
                   type="text"
                   class="form-control"
                   @input="helper_checkIfInputIsEmpty"
-                  v-model.trim="data.adress"
+                  v-model.trim="data.address"
                 />
                 <label for="name_input" class="form-label">{{
-                  $t("forms.labels.address_ar")
+                  $t("forms.labels.address")
                 }}</label>
               </div>
             </div>
-            <!-- adress -->
-            <div class="col-md-6 py-0">
-              <div class="input_wrapper top_label">
-                <input
-                  type="text"
-                  class="form-control"
-                  @input="helper_checkIfInputIsEmpty"
-                  v-model.trim="data.adress"
-                />
-                <label for="name_input" class="form-label">{{
-                  $t("forms.labels.address_en")
-                }}</label>
-              </div>
-            </div>
+
             <!-- tax number -->
             <div class="col-lg-12 py-0">
               <div class="input_wrapper top_label">
@@ -76,10 +63,10 @@
                   type="text"
                   class="form-control"
                   @input="helper_checkIfInputIsEmpty"
-                  v-model.trim="data.adress"
+                  v-model.trim="data.taxNumber"
                 />
                 <label for="name_input" class="form-label">{{
-                  $t("forms.labels.taxNumber")
+                  $t("forms.labels.tax_number")
                 }}</label>
               </div>
             </div>
@@ -132,7 +119,7 @@ export default {
       // ========== create_data
       data: {
         name: null,
-        adress: null,
+        address: null,
         taxNumber: null,
       },
 
@@ -153,15 +140,7 @@ export default {
     validateCreateForm() {
       this.btnIsLoading = true;
 
-      if (!this.data.image?.img_file) {
-        this.$iziToast.error({
-          timeout: 2000,
-          message: this.$t("forms.validation.image"),
-          position: "bottomRight",
-        });
-        this.btnIsLoading = false;
-        return;
-      } else if (!this.data.name) {
+      if (!this.data.name) {
         this.$iziToast.error({
           timeout: 2000,
           message: this.$t("forms.validation.name"),
@@ -169,26 +148,11 @@ export default {
         });
         this.btnIsLoading = false;
         return;
-      } else if (!this.data.phone) {
+      }
+      if (!this.data.address) {
         this.$iziToast.error({
           timeout: 2000,
-          message: this.$t("forms.validation.phone"),
-          position: "bottomRight",
-        });
-        this.btnIsLoading = false;
-        return;
-      } else if (!this.data.email) {
-        this.$iziToast.error({
-          timeout: 2000,
-          message: this.$t("forms.validation.email"),
-          position: "bottomRight",
-        });
-        this.btnIsLoading = false;
-        return;
-      } else if (!this.data.password) {
-        this.$iziToast.error({
-          timeout: 2000,
-          message: this.$t("forms.validation.password"),
+          message: this.$t("forms.validation.address"),
           position: "bottomRight",
         });
         this.btnIsLoading = false;
@@ -204,13 +168,8 @@ export default {
       const submit_data = new FormData();
       // submit_data.append("image", this.data.image.img_file);
       submit_data.append("name", this.data.name);
-      // submit_data.append("phone", this.data.phone);
-      // submit_data.append("email", this.data.email);
-      // // submit_data.append("role_id", this.data.permission.id);
-      // submit_data.append("password", this.data.password);
-      // submit_data.append("is_ban", +this.data.is_ban);
-      // submit_data.append("is_active", +this.data.is_active);
-      // submit_data.append("ban_reason", this.data.ban_reason);
+      submit_data.append("address", this.data.address);
+      submit_data.append("tax_number", this.data.taxNumber);
 
       this.$axios({
         method: "POST",

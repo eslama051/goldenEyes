@@ -31,8 +31,8 @@
         <!-- ================== You Can use any slots you want ================== -->
         <!-- ====== Select row field ====== -->
         <!-- Image -->
-        <template v-slot:[`item.image`]="{ item }">
-          <img @click="show_model_1" class="image" :src="item.image" />
+        <template v-slot:[`item.logo`]="{ item }">
+          <img @click="show_model_1" class="image" :src="item.logo" />
         </template>
 
         <!-- Select no data State -->
@@ -179,12 +179,12 @@ export default {
           href: "/",
         },
         {
-          text: this.$t("breadcrumb.ades.title"),
+          text: this.$t("breadcrumb.companies.title"),
           disabled: false,
-          href: "/sliders",
+          href: "/clients",
         },
         {
-          text: this.$t("breadcrumb.ades.all"),
+          text: this.$t("breadcrumb.companies.all"),
           disabled: true,
           href: "",
         },
@@ -230,9 +230,9 @@ export default {
   },
 
   watch: {
-    [`paginations.current_page`]() {
-      this.setRows();
-    },
+    // [`paginations.current_page`]() {
+    //   this.setRows();
+    // },
   },
 
   computed: {
@@ -243,35 +243,18 @@ export default {
     headers() {
       if (this.lang == "ar") {
         return [
+          { text: "الصوره", value: "logo", align: "center" },
+          { text: "الاسم (بالعربيه) ", value: "ar.name", align: "center" },
+          { text: "الاسم (بالانجليزيه) ", value: "en.name", align: "center" },
           {
-            text: "الصورة",
+            text: " عنوان",
+            value: "address",
             align: "center",
-            value: "image",
-            sortable: false,
           },
           {
-            text: "الاسم",
+            text: "رقم ضريبي",
+            value: "tax_number",
             align: "center",
-            value: "name",
-            sortable: false,
-          },
-          {
-            text: "التنصنيف",
-            align: "center",
-            value: "category.name",
-            sortable: false,
-          },
-          {
-            text: "السعر",
-            align: "center",
-            value: "price",
-            sortable: false,
-          },
-          {
-            text: "اسم الكميه",
-            align: "center",
-            value: "quantity.name",
-            sortable: false,
           },
           {
             text: "التحكم",
@@ -282,39 +265,20 @@ export default {
         ];
       } else {
         return [
+          { text: "Name", value: "name", align: "center" },
           {
-            text: "Image",
+            text: "Address",
+            value: "address",
             align: "center",
-            value: "image",
-            sortable: false,
           },
           {
-            text: "The Name",
+            text: "Amounts",
+            value: "tax_number",
             align: "center",
-            value: "name",
-            sortable: false,
           },
 
           {
-            text: "The category",
-            align: "center",
-            value: "category.name",
-            sortable: false,
-          },
-          {
-            text: "The price",
-            align: "center",
-            value: "price",
-            sortable: false,
-          },
-          {
-            text: "The Quantity Name",
-            align: "center",
-            value: "quantity.name",
-            sortable: false,
-          },
-          {
-            text: "التحكم",
+            text: "control",
             value: "actions",
             align: "center",
             sortable: false,
@@ -341,14 +305,15 @@ export default {
 
     // ==================== Start CRUD ====================
     addItem() {
-      this.$router.push({ path: "/ades/add" });
+      this.$router.push({ path: "/companies/add" });
     },
     showItem(item) {
-      this.$router.push({ path: "/ades/show/" + item.id });
+      this.$router.push({ path: "/companies/show/" + item.id });
     },
     editItem(item) {
-      this.$router.push({ path: "/ades/edit/" + item.id });
+      this.$router.push({ path: "/companies/edit/" + item.id });
     },
+
     // ===== Delete
     deleteItem(item) {
       this.dialogDelete = true;
@@ -357,7 +322,7 @@ export default {
     deleteItemConfirm() {
       this.$axios({
         method: "DELETE",
-        url: `product/${this.itemtoDelete.id}`,
+        url: `client/${this.itemtoDelete.id}`,
       })
         .then(() => {
           this.rows = this.rows.filter((item) => {
@@ -384,8 +349,8 @@ export default {
     },
     deleteSelectedConfirm() {
       this.$axios({
-        method: "DELETE",
-        url: `product/deleteAll`,
+        method: "POST",
+        url: `client/deleteAll`,
         data: { ids: this.selected.map((item) => item.id) },
       })
         .then(() => {
@@ -415,16 +380,17 @@ export default {
       this.lodaing = true;
       this.$axios({
         method: "GET",
-        url: "product",
-        params: { page: this.paginations.current_page },
+        url: "company",
+        // params: { page: this.paginations.current_page },
       })
         .then((res) => {
           // this.paginations.last_page = res.data.meta.last_page;
           // this.paginations.items_per_page = res.data.meta.per_page;
 
           this.rows = res.data.data;
+          console.log(res.data.data);
 
-          this.statisticsItem.number = res.data.meta.total;
+          // this.statisticsItem.number = res.data.meta.total;
 
           this.lodaing = false;
         })

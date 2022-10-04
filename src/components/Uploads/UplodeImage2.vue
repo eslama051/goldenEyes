@@ -5,7 +5,7 @@
         <img v-if="image.img_src" :src="image.img_src" />
         <img v-else-if="data_src" :src="data_src" />
         <div v-else class="placholder">
-          <span>main image</span>
+          <span>{{ label }} image</span>
           <i class="fas fa-camera-alt"></i>
         </div>
       </transition>
@@ -31,6 +31,10 @@ export default {
   props: {
     data_src: {
       default: null,
+      required: false,
+    },
+    label: {
+      default: "MAIN",
       required: false,
     },
   },

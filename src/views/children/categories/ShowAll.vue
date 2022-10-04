@@ -31,10 +31,6 @@
         <!-- ================== You Can use any slots you want ================== -->
         <!-- ====== Select row field ====== -->
         <!-- Image -->
-        <template v-slot:[`item.image`]="{ item }">
-          <img @click="show_model_1" class="image" :src="item.image" />
-        </template>
-
         <!-- Select no data State -->
         <template v-slot:no-data>
           {{ $t("table.noData") }}
@@ -43,9 +39,9 @@
         <!-- Select actions-->
         <template v-slot:[`item.actions`]="{ item }">
           <div class="_actions">
-            <v-icon class="show" small @click="showItem(item)">
+            <!-- <v-icon class="show" small @click="showItem(item)">
               fal fa-eye
-            </v-icon>
+            </v-icon> -->
             <v-icon class="edit" small @click="editItem(item)">
               fal fa-edit
             </v-icon>
@@ -147,21 +143,6 @@
       </div>
     </template>
     <!-- End Pagination -->
-
-    <!-- Start Image_Model -->
-    <base-model
-      @closeModel="model_1.show_model = false"
-      :show="model_1.show_model"
-    >
-      <div class="image">
-        <img
-          v-if="model_1.model_img_src"
-          :src="model_1.model_img_src"
-          alt="..."
-        />
-      </div>
-    </base-model>
-    <!-- End Image_Model -->
   </div>
 </template>
 
@@ -179,12 +160,12 @@ export default {
           href: "/",
         },
         {
-          text: this.$t("breadcrumb.ades.title"),
+          text: this.$t("breadcrumb.categories.title"),
           disabled: false,
-          href: "/sliders",
+          href: "/categories",
         },
         {
-          text: this.$t("breadcrumb.ades.all"),
+          text: this.$t("breadcrumb.categories.all"),
           disabled: true,
           href: "",
         },
@@ -243,36 +224,13 @@ export default {
     headers() {
       if (this.lang == "ar") {
         return [
+          { text: "اسم (عربي)", value: "ar.name", align: "center" },
           {
-            text: "الصورة",
+            text: "اسم (انجليزي)",
+            value: "en.name",
             align: "center",
-            value: "image",
-            sortable: false,
           },
-          {
-            text: "الاسم",
-            align: "center",
-            value: "name",
-            sortable: false,
-          },
-          {
-            text: "التنصنيف",
-            align: "center",
-            value: "category.name",
-            sortable: false,
-          },
-          {
-            text: "السعر",
-            align: "center",
-            value: "price",
-            sortable: false,
-          },
-          {
-            text: "اسم الكميه",
-            align: "center",
-            value: "quantity.name",
-            sortable: false,
-          },
+
           {
             text: "التحكم",
             value: "actions",
@@ -289,32 +247,23 @@ export default {
             sortable: false,
           },
           {
-            text: "The Name",
+            text: "content (ar)",
+            value: "ar.desc",
             align: "center",
-            value: "name",
-            sortable: false,
-          },
-
-          {
-            text: "The category",
-            align: "center",
-            value: "category.name",
-            sortable: false,
           },
           {
-            text: "The price",
+            text: "content (en)",
+            value: "en.desc",
             align: "center",
-            value: "price",
-            sortable: false,
+          },
+          { text: "title (ar)", value: "ar.name", align: "center" },
+          {
+            text: "title (en)",
+            value: "en.name",
+            align: "center",
           },
           {
-            text: "The Quantity Name",
-            align: "center",
-            value: "quantity.name",
-            sortable: false,
-          },
-          {
-            text: "التحكم",
+            text: "control",
             value: "actions",
             align: "center",
             sortable: false,
@@ -341,14 +290,15 @@ export default {
 
     // ==================== Start CRUD ====================
     addItem() {
-      this.$router.push({ path: "/ades/add" });
+      this.$router.push({ path: "/categories/add" });
     },
     showItem(item) {
-      this.$router.push({ path: "/ades/show/" + item.id });
+      this.$router.push({ path: "/home_screen/newCollection/show/" + item.id });
     },
     editItem(item) {
-      this.$router.push({ path: "/ades/edit/" + item.id });
+      this.$router.push({ path: "/categories/edit/" + item.id });
     },
+
     // ===== Delete
     deleteItem(item) {
       this.dialogDelete = true;
@@ -357,7 +307,7 @@ export default {
     deleteItemConfirm() {
       this.$axios({
         method: "DELETE",
-        url: `product/${this.itemtoDelete.id}`,
+        url: `category/${this.itemtoDelete.id}`,
       })
         .then(() => {
           this.rows = this.rows.filter((item) => {
@@ -384,8 +334,8 @@ export default {
     },
     deleteSelectedConfirm() {
       this.$axios({
-        method: "DELETE",
-        url: `product/deleteAll`,
+        method: "POST",
+        url: `ad/deleteAll`,
         data: { ids: this.selected.map((item) => item.id) },
       })
         .then(() => {
@@ -415,16 +365,13 @@ export default {
       this.lodaing = true;
       this.$axios({
         method: "GET",
-        url: "product",
+        url: "category",
         params: { page: this.paginations.current_page },
       })
         .then((res) => {
-          // this.paginations.last_page = res.data.meta.last_page;
-          // this.paginations.items_per_page = res.data.meta.per_page;
-
           this.rows = res.data.data;
 
-          this.statisticsItem.number = res.data.meta.total;
+          this.statisticsItem.number = res.data.total;
 
           this.lodaing = false;
         })
