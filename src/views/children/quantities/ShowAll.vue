@@ -180,7 +180,7 @@ export default {
         {
           text: this.$t("breadcrumb.qties.title"),
           disabled: false,
-          href: "/countries",
+          href: "/quantities",
         },
         {
           text: this.$t("breadcrumb.qties.all"),
@@ -219,7 +219,7 @@ export default {
       // ========== pagination
       paginations: {
         current_page: 1,
-        last_page: 2,
+        last_page: 1,
         items_per_page: 20,
       },
 
@@ -391,7 +391,7 @@ export default {
     deleteItemConfirm() {
       this.$axios({
         method: "DELETE",
-        url: `country/${this.itemtoDelete.id}`,
+        url: `quantity/${this.itemtoDelete.id}`,
       })
         .then(() => {
           this.rows = this.rows.filter((item) => {
@@ -419,7 +419,7 @@ export default {
     deleteSelectedConfirm() {
       this.$axios({
         method: "POST",
-        url: `country/deleteAll`,
+        url: `quantity/deleteAll`,
         data: { ids: this.selected.map((item) => item.id) },
       })
         .then(() => {
@@ -449,16 +449,13 @@ export default {
       this.lodaing = true;
       this.$axios({
         method: "GET",
-        url: "country",
+        url: "quantity",
         params: { page: this.paginations.current_page },
       })
         .then((res) => {
-          this.paginations.last_page = res.data.meta.last_page;
-          this.paginations.items_per_page = res.data.meta.per_page;
-
           this.rows = res.data.data;
 
-          this.statisticsItem.number = res.data.meta.total;
+          this.statisticsItem.number = res.data.total;
 
           this.lodaing = false;
         })

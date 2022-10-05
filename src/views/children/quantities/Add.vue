@@ -196,7 +196,7 @@ export default {
 
       this.$axios({
         method: "POST",
-        url: "country",
+        url: "quantity",
         data: submit_data,
       })
         .then(() => {
@@ -205,7 +205,7 @@ export default {
             message: this.$t("addSuccess"),
             position: "bottomRight",
           });
-          this.$router.push({ path: "/countries" });
+          this.$router.push({ path: "/quantities" });
           this.btnIsLoading = false;
         })
         .catch((err) => {

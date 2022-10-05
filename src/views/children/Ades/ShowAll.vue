@@ -180,8 +180,8 @@ export default {
         },
         {
           text: this.$t("breadcrumb.ades.title"),
-          disabled: false,
-          href: "/sliders",
+          disabled: true,
+          href: "/ades",
         },
         {
           text: this.$t("breadcrumb.ades.all"),
@@ -258,7 +258,7 @@ export default {
           {
             text: "التنصنيف",
             align: "center",
-            value: "category.name",
+            value: "category.ar.name",
             sortable: false,
           },
           {
@@ -270,7 +270,7 @@ export default {
           {
             text: "اسم الكميه",
             align: "center",
-            value: "quantity.name",
+            value: "quantity.ar.name",
             sortable: false,
           },
           {
@@ -298,7 +298,7 @@ export default {
           {
             text: "The category",
             align: "center",
-            value: "category.name",
+            value: "category.en.name",
             sortable: false,
           },
           {
@@ -310,7 +310,7 @@ export default {
           {
             text: "The Quantity Name",
             align: "center",
-            value: "quantity.name",
+            value: "quantity.en.name",
             sortable: false,
           },
           {
@@ -424,7 +424,7 @@ export default {
 
           this.rows = res.data.data;
 
-          this.statisticsItem.number = res.data.meta.total;
+          this.statisticsItem.number = res.data.total;
 
           this.lodaing = false;
         })

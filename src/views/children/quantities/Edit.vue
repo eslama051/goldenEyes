@@ -260,7 +260,7 @@ export default {
       // submit_data.append("flag", this.data.image.img_file);
       submit_data.append("ar[name]", this.data.ar.name);
       submit_data.append("en[name]", this.data.en.name);
-      submit_data.append("_method", "PATCH");
+      submit_data.append("_method", "Put");
       // submit_data.append("ar[nationality]", this.data.ar.nationality);
       // submit_data.append("en[nationality]", this.data.en.nationality);
       // submit_data.append("ar[currency]", this.data.ar.currency);
@@ -269,7 +269,7 @@ export default {
 
       this.$axios({
         method: "POST",
-        url: `country/${this.id}`,
+        url: `quantity/${this.id}`,
         data: submit_data,
       })
         .then(() => {
@@ -278,7 +278,7 @@ export default {
             message: this.$t("addSuccess"),
             position: "bottomRight",
           });
-          this.$router.push({ path: "/countries" });
+          this.$router.push({ path: "/quantities" });
           this.btnIsLoading = false;
         })
         .catch((err) => {
@@ -295,9 +295,8 @@ export default {
     getData() {
       this.$axios({
         method: "GET",
-        url: `country/${this.id}`,
+        url: `quantity/${this.id}`,
       }).then((res) => {
-        this.data.image = res.data.data.image;
         this.data.ar.name = res.data.data.ar.name;
         this.data.en.name = res.data.data.en.name;
       });

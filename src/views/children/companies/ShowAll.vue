@@ -390,7 +390,7 @@ export default {
           this.rows = res.data.data;
           console.log(res.data.data);
 
-          // this.statisticsItem.number = res.data.meta.total;
+          this.statisticsItem.number = res.data.total;
 
           this.lodaing = false;
         })

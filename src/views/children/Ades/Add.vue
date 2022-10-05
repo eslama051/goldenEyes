@@ -260,33 +260,12 @@ export default {
     // Submit Data
     submitData() {
       const submit_data = new FormData();
-      submit_data.append("main_image", this.data.image.img_file);
-      this.data.images.forEach((img, index) => {
-        submit_data.append(`images[${index}]`, img);
-      });
 
       submit_data.append("name", this.data.name);
-      submit_data.append("desc", this.data.desc);
-      submit_data.append("qty", this.data.amountLeft);
-
-      submit_data.append("user_id", this.data.user.id);
+      submit_data.append("image", this.data.image.img_file);
+      submit_data.append("price", this.data.price);
+      submit_data.append("quantity_id", this.data.qtyName.id);
       submit_data.append("category_id", this.data.category.id);
-      submit_data.append("sub_category_id", this.data.subCategorie.id);
-      submit_data.append("country_id", this.data.country.id);
-      submit_data.append("city_id", this.data.city.id);
-      submit_data.append("shipping_way_id", this.data.shippingWay.id);
-      submit_data.append("product_status_id", this.data.status.id);
-
-      if (this.data.productRadio == "isDirectSell") {
-        submit_data.append("is_direct_sale", 1);
-        submit_data.append("product_price", this.data.sellPrice);
-      } else {
-        submit_data.append("is_bid", 1);
-        submit_data.append("start_bid_date", this.data.start_date);
-        submit_data.append("end_bid_date", this.data.end_date);
-        submit_data.append("bid_price", this.data.start_price);
-        submit_data.append("bid_value", this.data.bit_value);
-      }
 
       this.$axios({
         method: "POST",
@@ -337,7 +316,7 @@ export default {
         this.categories = res.data.data.map((item) => {
           return {
             id: item.id,
-            name: `${item.name}`,
+            name: `${item.ar.name} - ${item.en.name}`,
           };
         });
       });
@@ -348,7 +327,7 @@ export default {
         this.quantityNames = res.data.data.map((item) => {
           return {
             id: item.id,
-            name: `${item.name}`,
+            name: `${item.ar.name} - ${item.en.name}`,
           };
         });
       });
